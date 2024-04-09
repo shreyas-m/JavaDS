@@ -35,6 +35,15 @@ public class DynamicArray<T> {
         currentSize++;
     }
 
+    public void add(int position, T element){
+        if (currentSize>=capacity){
+            increaseCapacity();
+        }
+        copyUp(position);
+        list[position] = element;
+        currentSize++;
+    }
+
 
     public void delete(int index){
         if(currentSize<=index || index<0){
@@ -58,6 +67,12 @@ public class DynamicArray<T> {
     private void copyDown(int index) {
         for (int i = index; i < currentSize; i++) {
             this.list[i] = this.list[i+1];
+        }
+    }
+
+    private void copyUp(int index) {
+        for (int i = currentSize; i < index; i++) {
+            this.list[i] = this.list[i-1];
         }
     }
 }
